@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice to Text</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    #transcription {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      color: #333;
+    }
+    #start-btn {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #start-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Voice to Text Converter</h1>
+  <button id="start-btn">Start Listening</button>
+  <div id="transcription">Your speech will appear here...</div>
+
+  <script>
+    // Check if SpeechRecognition is supported in the browser
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("Your browser does not support Speech Recognition API.");
+    } else {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = true; // Allows for continuous speech recognition
+      recognition.interimResults = true; // Allows real-time transcription of speech
+
+      // Set language to English (can be changed as per preference)
+      recognition.lang = "en-US";
+
+      const startBtn = document.getElementById("start-btn");
+      const transcriptionDiv = document.getElementById("transcription");
+
+      // Start speech recognition when the button is clicked
+      startBtn.addEventListener("click", function() {
+        recognition.start();
+        startBtn.disabled = true;
+        startBtn.textContent = "Listening...";
+      });
+
+      // Capture speech and convert to text
+      recognition.onresult = function(event) {
+        const transcript = event.results[event.results.length - 1][0].transcript;
+        transcriptionDiv.textContent = transcript;
+      };
+
+      // Handle errors
+      recognition.onerror = function(event) {
+        transcriptionDiv.textContent = "Error occurred: " + event.error;
+      };
+
+      // Stop speech recognition
+      recognition.onend = function() {
+        startBtn.disabled = false;
+        startBtn.textContent = "Start Listening";
+      };
+    }
+  </script>
+</body>
+</html>

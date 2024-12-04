@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to Braille Converter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Text to Braille Converter</h1>
+    <textarea id="inputText" placeholder="Type here to convert to Braille..."></textarea>
+    <button onclick="convertText()">Convert to Binary</button>
+
+   
+
+    <div>
+        <div id="binaryOutput"></div>
+        <button onclick="convertBinaryToBraille()">Convert to Braille</button>
+    </div>
+    <div id="brailleOutput"></div>
+
+    
+  </div>
+
+  <script src="braially.js"></script>
+  <script src="aiml/aiml.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

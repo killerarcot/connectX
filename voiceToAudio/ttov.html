@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to Speech</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+
+    #container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      font-size: 1.2rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="container">
+    <h1>Text to Speech</h1>
+    <textarea id="text-input" placeholder="Enter text here..."></textarea>
+    <button onclick="speakText()">Speak</button>
+  </div>
+
+  <script>
+    function speakText() {
+      // Get the text from the textarea
+      const text = document.getElementById('text-input').value;
+
+      // Check if there is any text entered
+      if (text === '') {
+        alert('Please enter some text to convert to speech.');
+        return;
+      }
+
+      // Initialize a new SpeechSynthesisUtterance instance
+      const utterance = new SpeechSynthesisUtterance(text);
+
+      // Optional: Set properties for the speech
+      utterance.pitch = 1; // Set pitch (normal is 1)
+      utterance.rate = 1;  // Set rate (normal is 1)
+      utterance.volume = 1; // Set volume (0 to 1)
+
+      // Speak the text
+      window.speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
